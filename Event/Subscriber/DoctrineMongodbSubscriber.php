@@ -171,17 +171,17 @@ class DoctrineMongodbSubscriber implements EventSubscriberInterface
         $values = $event->getValues();
         $value = $values['value'];
 
-        if (isset($value['left_datetime'][0]) && isset($value['right_datetime'][0])) {
+        if (isset($value['ldt'][0]) && isset($value['rdt'][0])) {
             $expression = $qb->expr()->field($event->getField())->range(
-                $value['left_datetime'][0],
-                $value['right_datetime'][0]
+                $value['ldt'][0],
+                $value['rdt'][0]
             );
 
-        } elseif (isset($value['left_datetime'][0])) {
-            $expression = $qb->expr()->field($event->getField())->gte($value['left_datetime'][0]);
+        } elseif (isset($value['ldt'][0])) {
+            $expression = $qb->expr()->field($event->getField())->gte($value['ldt'][0]);
 
-        } elseif (isset($value['right_datetime'][0])) {
-            $expression = $qb->expr()->field($event->getField())->lte($value['right_datetime'][0]);
+        } elseif (isset($value['rdt'][0])) {
+            $expression = $qb->expr()->field($event->getField())->lte($value['rdt'][0]);
         }
 
         if (isset($expression)) {

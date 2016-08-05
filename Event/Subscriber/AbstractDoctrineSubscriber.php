@@ -138,8 +138,8 @@ abstract class AbstractDoctrineSubscriber
         $values = $event->getValues();
         $value  = $values['value'];
 
-        if (isset($value['left_datetime'][0]) || $value['right_datetime'][0]) {
-            $event->setCondition($expr->datetimeInRange($event->getField(), $value['left_datetime'][0], $value['right_datetime'][0]));
+        if (isset($value['ldt'][0]) || $value['rdt'][0]) {
+            $event->setCondition($expr->datetimeInRange($event->getField(), $value['ldt'][0], $value['rdt'][0]));
         }
     }
 

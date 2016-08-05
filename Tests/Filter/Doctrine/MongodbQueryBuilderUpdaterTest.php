@@ -247,11 +247,11 @@ class MongodbQueryBuilderUpdaterTest extends TestCase
         $form = $this->formFactory->create(RangeFilterType::class);
         $form->submit(array(
             'updatedAt' => array(
-                'left_datetime' => array(
+                'ldt' => array(
                     'date' => '2012-05-12',
                     'time' => '14:55',
                 ),
-                'right_datetime' => array(
+                'rdt' => array(
                     'date' => array('year' => '2012', 'month' => '6', 'day' => '10'),
                     'time' => array('hour' => 22, 'minute' => 12),
                 ),
