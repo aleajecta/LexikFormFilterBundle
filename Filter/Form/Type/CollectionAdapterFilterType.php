@@ -42,9 +42,9 @@ class CollectionAdapterFilterType extends AbstractType
 
             // then add one row that will be used for filtering
             $index = 0;
-            $childOptions = array_replace(array(
+            $childOptions = array_replace([
                 'property_path' => sprintf('[%d]', $index),
-            ), $options['entry_options']);
+            ], $options['entry_options']);
 
             $form->add($index, $options['entry_type'], $childOptions);
         });
