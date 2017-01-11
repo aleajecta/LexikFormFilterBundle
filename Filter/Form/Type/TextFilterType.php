@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
 
@@ -17,6 +19,13 @@ use Symfony\Component\OptionsResolver\Options;
  */
 class TextFilterType extends AbstractType
 {
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        parent::finishView($view, $form, $options);
+
+        if($options['suggest_route'])
+            $view->vars['suggest_route'] = $options['suggest_route'];
+    }
     /**
      * {@inheritdoc}
      */
@@ -40,6 +49,7 @@ class TextFilterType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'required'               => false,
+                'suggest_route'          => '',
                 'condition_pattern'      => FilterOperands::STRING_EQUALS,
                 'compound'               => function (Options $options) {
                     return $options['condition_pattern'] == FilterOperands::OPERAND_SELECTOR;

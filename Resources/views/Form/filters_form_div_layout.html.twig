@@ -1,4 +1,7 @@
 {% block filter_text_widget %}
+    {% if suggest_route is defined %}
+        {% set attr = attr|merge({'data-suggest-url':url(suggest_route)} ) %}
+    {% endif %}
     {% if compound %}
         <div class="filter-pattern-selector">
             {{ form_widget(form.condition_pattern, {'attr': {'class': 'pattern-selector'} }) }}
